@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Libraries;
+namespace danmurf\MetaTag;
 
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.
@@ -8,7 +8,6 @@ namespace App\Libraries;
 class MetaTag
 {
     protected $prefix;
-
     protected $noindex;
     protected $keywords;
     protected $description;
