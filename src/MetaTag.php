@@ -1,6 +1,4 @@
-<?php
-
-namespace danmurf\MetaTag;
+<?php namespace danmurf;
 
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.

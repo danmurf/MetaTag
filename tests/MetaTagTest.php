@@ -1,12 +1,22 @@
 <?php
 
-class MetaTagTest extends \PHPUnit_Framework_TestCase {
+use danmurf\MetaTag as MetaTag;
+
+class MetaTagTest extends TestCase {
 
     /**
      * @test
      */
-    public function ExampleTest() {
+    public function testing_setup_works_ok() {
         $this->assertTrue(true);
     }
 
+    /**
+     * @test
+     */
+     public function can_set_keywords()
+     {
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->keywords(['first', 'second', 'third']));
+     }
 }
