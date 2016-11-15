@@ -10,8 +10,6 @@ class MetaTag
     protected $keywords;
     protected $description;
     protected $author;
-    protected $twitter_card;
-    protected $open_graph;
 
     /**
      * Output the meta tags.
