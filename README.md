@@ -5,3 +5,7 @@
 A library for aggregating and generating html head meta tags.
 
 Note: This library should be stable, but it is in development. Documentation coming soon.
+
+To get started, install the library with composer:
+
+`composer require danmurf/metatag`
