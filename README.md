@@ -10,46 +10,62 @@ To get started, install the library with composer:
 
 Start up the library:
 
-  use danmurf\MetaTag;
+~~~~
+use danmurf\MetaTag;
 
-  class MyController
+class MyController
+{
+  public function index()
   {
-    public function index()
-    {
-      $metatag = new MetaTag();
-      //...
-    }
+    $metatag = new MetaTag();
+    //...
   }
+}
+~~~~
 
 Add page keywords:
 
-  $metatag->keywords(['awesome', 'weblog', 'writings']);
+~~~~
+$metatag->keywords(['awesome', 'weblog', 'writings']);
+~~~~
 
 Add a page description:
 
-  $metatag->description("This weblog is about...");
+~~~~
+$metatag->description("This weblog is about...");
+~~~~
 
 Add an author tag:
 
-  $metatag->author("Jessie Wongus");
+~~~~
+$metatag->author("Jessie Wongus");
+~~~~
 
 If you want to hide the page from search engines:
 
-  $metatag->noindex(true);
+~~~~
+$metatag->noindex(true);
+~~~~
 
 Then add the output to your view / template to render the meta tags:
 
-  $metatag->render();
+~~~~
+$metatag->render();
+~~~~
 
 Final output:
 
-  <meta name="keywords" content="awesome, weblog, writings">
-  <meta name="description" content="This weblog is about...">
-  <meta name="author" content="Jessie Wongus">
+~~~~
+<meta name="keywords" content="awesome, weblog, writings">
+<meta name="description" content="This weblog is about...">
+<meta name="author" content="Jessie Wongus">
+~~~~
 
 If you like to keep your output tidy, add a indent of 4 spaces to your meta tags:
 
-  $metatag->render(4);
+~~~~
+$metatag->render(4);
+~~~~
 
 ## License
 
