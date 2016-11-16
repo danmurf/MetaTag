@@ -21,7 +21,7 @@ class MetaTagTest extends TestCase
      {
          //Set the keywords
          $metatag = new MetaTag();
-         $this->assertNull($metatag->keywords(['first', 'second', 'third']));
+         $metatag->keywords(['first', 'second', 'third']);
 
          //Check they render correctly
          $expected_result = '<meta name="keywords" content="first, second, third">'."\n";
@@ -33,7 +33,13 @@ class MetaTagTest extends TestCase
       */
      public function can_set_no_index()
      {
-         //@ToDo
+         //Set the no index tag
+         $metatag = new MetaTag();
+         $metatag->noindex(true);
+
+         //Check it renders correctly
+         $expected_result = '<meta name="robots" content="noindex, noarchive, nofollow">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_noindex());
      }
 
      /**
