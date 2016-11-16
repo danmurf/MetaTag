@@ -57,7 +57,9 @@ class MetaTagTest extends TestCase
       */
      public function can_set_description()
      {
-         //@ToDo
+         //Set the description tag
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->description("This is a description of the webpage."));
      }
 
      /**
@@ -65,7 +67,13 @@ class MetaTagTest extends TestCase
       */
      public function can_render_description()
      {
-         //@ToDo
+         //Set the description tag
+         $metatag = new MetaTag();
+         $metatag->description("This is a description of the webpage.");
+
+         //Check it renders correctly
+         $expected_result = '<meta name="description" content="This is a description of the webpage.">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_description());
      }
 
      /**
