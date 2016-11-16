@@ -81,7 +81,9 @@ class MetaTagTest extends TestCase
       */
      public function can_set_author()
      {
-         //@ToDo
+         //Set the author tag
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->author("Jessie Wongus"));
      }
 
      /**
@@ -89,6 +91,12 @@ class MetaTagTest extends TestCase
       */
      public function can_render_author()
      {
-         //@ToDo
+         //Set the author tag
+         $metatag = new MetaTag();
+         $metatag->author("Jessie Wongus");
+
+         //Check it renders correctly
+         $expected_result = '<meta name="author" content="Jessie Wongus">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_author());
      }
 }
