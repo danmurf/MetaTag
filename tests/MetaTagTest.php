@@ -19,7 +19,13 @@ class MetaTagTest extends TestCase
       */
      public function can_render_keywords()
      {
-         //@ToDo
+         //Set the keywords
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->keywords(['first', 'second', 'third']));
+
+         //Check they render correctly
+         $expected_result = '<meta name="keywords" content="first, second, third">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_keywords());
      }
 
      /**
