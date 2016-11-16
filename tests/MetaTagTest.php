@@ -35,11 +35,7 @@ class MetaTagTest extends TestCase
      {
          //Set the no index tag
          $metatag = new MetaTag();
-         $metatag->noindex(true);
-
-         //Check it renders correctly
-         $expected_result = '<meta name="robots" content="noindex, noarchive, nofollow">'."\n";
-         $this->assertEquals($expected_result, $metatag->render_noindex());
+         $this->assertNull($metatag->noindex(true));
      }
 
      /**
@@ -47,7 +43,13 @@ class MetaTagTest extends TestCase
       */
      public function can_render_no_index()
      {
-         //@ToDo
+         //Set the no index tag
+         $metatag = new MetaTag();
+         $metatag->noindex(true);
+
+         //Check it renders correctly
+         $expected_result = '<meta name="robots" content="noindex, noarchive, nofollow">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_noindex());
      }
 
      /**
