@@ -127,6 +127,7 @@ class MetaTagTest extends TestCase
       * @test
       * @covers \danmurf\MetaTag::render
       * @covers \danmurf\MetaTag::render_meta_tag
+      * @covers \danmurf\MetaTag::render_tag
       */
      public function all_tags_render_together()
      {

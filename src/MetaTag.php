@@ -32,6 +32,27 @@ class MetaTag implements MetaTaggableInterface
     }
 
     /**
+     * Render a head tag.
+     * @method render_tag
+     * @param  $type     $type       The type of tag, e.g. meta, or link.
+     * @param  array     $attributes A key value array of attributes
+     * @return string                The head tag string.
+     */
+    private function render_tag($type, $attributes = array())
+    {
+        $tag = '<' . $type;
+
+        foreach ($attributes as $attribute => $value)
+        {
+            $tag .= ' ' . $attribute . '="' . $value . '"';
+        }
+
+        $tag .= ">";
+
+        return $tag;
+    }
+
+    /**
      * Render a meta tag.
      * @method render_meta_tag
      * @param  string          $name    The name of the meta tag
@@ -40,8 +61,7 @@ class MetaTag implements MetaTaggableInterface
      */
     private function render_meta_tag($name, $content)
     {
-        $content = $this->sanitise_content($content);
-        return $this->prefix . "<meta name=\"$name\" content=\"$content\">\n";
+        return $this->prefix . $this->render_tag('meta', ['name' => $name, 'content' => $this->sanitise_content($content)])."\n";
     }
 
     /**
