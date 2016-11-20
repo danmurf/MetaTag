@@ -1,9 +1,11 @@
 <?php namespace danmurf;
 
+use danmurf\MetaTaggableInterface;
+
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.
  */
-class MetaTag
+class MetaTag implements MetaTaggableInterface
 {
     protected $prefix;
     protected $noindex;
