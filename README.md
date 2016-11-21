@@ -10,7 +10,7 @@ To get started, install the library with composer:
 
 Start up the library:
 
-~~~~
+```php
 use danmurf\MetaTag;
 
 class MyController
@@ -21,51 +21,57 @@ class MyController
     //...
   }
 }
-~~~~
+```
 
 Add page keywords:
 
-~~~~
+```php
 $metatag->keywords(['awesome', 'weblog', 'writings']);
-~~~~
+```
 
 Add a page description:
 
-~~~~
+```php
 $metatag->description("This weblog is about...");
-~~~~
+```
 
 Add an author tag:
 
-~~~~
+```php
 $metatag->author("Jessie Wongus");
-~~~~
+```
+
+Set the page's canonical URL
+```php
+$metatag->canonical("https://www.example.com/splendid");
+```
 
 If you want to hide the page from search engines:
 
-~~~~
+```php
 $metatag->noindex(true);
-~~~~
+```
 
 Then add the output to your view / template to render the meta tags:
 
-~~~~
+```php
 $metatag->render();
-~~~~
+```
 
 Final output:
 
-~~~~
+```html
 <meta name="keywords" content="awesome, weblog, writings">
 <meta name="description" content="This weblog is about...">
 <meta name="author" content="Jessie Wongus">
-~~~~
+<link rel="canonical" href="https://www.example.com/splendid">
+```
 
 If you like to keep your output tidy, add a indent of 4 spaces to your meta tags:
 
-~~~~
+```php
 $metatag->render(4);
-~~~~
+```
 
 ## License
 
