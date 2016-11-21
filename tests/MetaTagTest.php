@@ -109,6 +109,32 @@ class MetaTagTest extends TestCase
 
      /**
       * @test
+      * @covers \danmurf\MetaTag::canonical
+      */
+     public function can_set_canonical_url()
+     {
+         //Set the canonical URL
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->canonical("https://www.example.com/testing?q=hello-world"));
+     }
+
+     /**
+      * @test
+      * @covers \danmurf\MetaTag::render_canonical
+      */
+     public function can_render_canonical_url()
+     {
+         //Set the canonical URL
+         $metatag = new MetaTag();
+         $this->assertNull($metatag->canonical("https://www.example.com/testing?q=hello-world"));
+
+         //Check it renders correctly
+         $expected_result = '<link rel="canonical" href="https://www.example.com/testing?q=hello-world">'."\n";
+         $this->assertEquals($expected_result, $metatag->render_canonical());
+     }
+
+     /**
+      * @test
       * @covers \danmurf\MetaTag::sanitise_content
       */
      public function content_is_properly_sanitised()
@@ -126,7 +152,6 @@ class MetaTagTest extends TestCase
      /**
       * @test
       * @covers \danmurf\MetaTag::render
-      * @covers \danmurf\MetaTag::render_meta_tag
       * @covers \danmurf\MetaTag::render_tag
       */
      public function all_tags_render_together()
@@ -137,12 +162,14 @@ class MetaTagTest extends TestCase
          $metatag->keywords(['first', 'second', 'third']);
          $metatag->description("This is a description of the webpage.");
          $metatag->author("Jessie Wongus");
+         $metatag->canonical("https://www.example.com/testing?q=hello-world");
 
          //Build the expected results with 4 spaces indented
          $expected_result =  '    <meta name="robots" content="noindex, noarchive, nofollow">'."\n";
          $expected_result .= '    <meta name="keywords" content="first, second, third">'."\n";
          $expected_result .= '    <meta name="description" content="This is a description of the webpage.">'."\n";
          $expected_result .= '    <meta name="author" content="Jessie Wongus">'."\n";
+         $expected_result .= '    <link rel="canonical" href="https://www.example.com/testing?q=hello-world">'."\n";
 
          $this->assertEquals($expected_result, $metatag->render(4)); //Render the results with 4 spaces indented
      }

@@ -16,7 +16,7 @@ interface MetaTaggableInterface
      * @param  boolean $value
      * @return null
      */
-    public function noindex($value = false);
+    public function noindex($value);
 
     /**
      * Output the noindex meta tag, if it was set.
@@ -31,7 +31,7 @@ interface MetaTaggableInterface
      * @param  array    $keywords An array of keywords.
      * @return null
      */
-    public function keywords($keywords = array());
+    public function keywords($keywords);
 
     /**
      * Output the page keywords meta tag, if they were set.
@@ -46,7 +46,7 @@ interface MetaTaggableInterface
      * @param  string      $description The page description.
      * @return null
      */
-    public function description($description = '');
+    public function description($description);
 
     /**
      * Output the page description meta tag, if it was set.
@@ -61,7 +61,7 @@ interface MetaTaggableInterface
      * @param  string $author The page author.
      * @return null
      */
-    public function author($author = '');
+    public function author($author);
 
     /**
      * Output the page author meta tag, if it was set.
@@ -69,4 +69,19 @@ interface MetaTaggableInterface
      * @return string
      */
     public function render_author();
+
+    /**
+     * Set the page's canonical URL.
+     * @method canonical
+     * @param  string    $url The page's canonical url
+     * @return null
+     */
+    public function canonical($url);
+
+    /**
+     * Output the page's canonical URL link tag.
+     * @method render_canonical
+     * @return string           Link tag with the page's canonical URL.
+     */
+    public function render_canonical();
 }

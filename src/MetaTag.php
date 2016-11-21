@@ -12,6 +12,7 @@ class MetaTag implements MetaTaggableInterface
     protected $keywords;
     protected $description;
     protected $author;
+    protected $canonical_url;
 
     /**
      * Output the meta tags.
@@ -27,6 +28,7 @@ class MetaTag implements MetaTaggableInterface
         $output .=  $this->render_keywords();
         $output .=  $this->render_description();
         $output .=  $this->render_author();
+        $output .=  $this->render_canonical();
 
         return $output;
     }
@@ -40,28 +42,16 @@ class MetaTag implements MetaTaggableInterface
      */
     private function render_tag($type, $attributes = array())
     {
-        $tag = '<' . $type;
+        $tag = $this->prefix . '<' . $type;
 
         foreach ($attributes as $attribute => $value)
         {
             $tag .= ' ' . $attribute . '="' . $value . '"';
         }
 
-        $tag .= ">";
+        $tag .= ">\n";
 
         return $tag;
-    }
-
-    /**
-     * Render a meta tag.
-     * @method render_meta_tag
-     * @param  string          $name    The name of the meta tag
-     * @param  string          $content The content of the meta tag
-     * @return string                   The final meta tag codes
-     */
-    private function render_meta_tag($name, $content)
-    {
-        return $this->prefix . $this->render_tag('meta', ['name' => $name, 'content' => $this->sanitise_content($content)])."\n";
     }
 
     /**
@@ -89,7 +79,7 @@ class MetaTag implements MetaTaggableInterface
      * @method noindex
      * @param  boolean $value True if you would like the page not to be indexed.
      */
-    public function noindex($value = false)
+    public function noindex($value)
     {
         $this->noindex = $value;
     }
@@ -101,7 +91,7 @@ class MetaTag implements MetaTaggableInterface
      */
     public function render_noindex()
     {
-        return $this->noindex == true ? $this->render_meta_tag('robots', "noindex, noarchive, nofollow") : null;
+        return $this->noindex == true ? $this->render_tag('meta', ['name' => 'robots', 'content' => 'noindex, noarchive, nofollow']) : null;
     }
 
     /**
@@ -109,7 +99,7 @@ class MetaTag implements MetaTaggableInterface
      * @method keywords
      * @param  array    $keywords An array of keywords to include.
      */
-    public function keywords($keywords = array())
+    public function keywords($keywords)
     {
         $this->keywords = $keywords;
     }
@@ -121,7 +111,7 @@ class MetaTag implements MetaTaggableInterface
      */
     public function render_keywords()
     {
-        return sizeof($this->keywords) > 0 ? $this->render_meta_tag('keywords', implode (", ", $this->keywords)) : null;
+        return sizeof($this->keywords) > 0 ? $this->render_tag('meta', ['name' => 'keywords', 'content' => $this->sanitise_content(implode(", ", $this->keywords))]) : null;
     }
 
     /**
@@ -129,7 +119,7 @@ class MetaTag implements MetaTaggableInterface
      * @method description
      * @param  string      $description A description of the page.
      */
-    public function description($description = '')
+    public function description($description)
     {
         $this->description = $description;
     }
@@ -141,7 +131,7 @@ class MetaTag implements MetaTaggableInterface
      */
     public function render_description()
     {
-        return strlen($this->description) > 0 ? $this->render_meta_tag('description', $this->description) : null;
+        return strlen($this->description) > 0 ? $this->render_tag('meta', ['name' => 'description', 'content' => $this->sanitise_content($this->description)]) : null;
     }
 
     /**
@@ -149,7 +139,7 @@ class MetaTag implements MetaTaggableInterface
      * @method author
      * @param  string $author The name of the author.
      */
-    public function author($author = '')
+    public function author($author)
     {
         $this->author = $author;
     }
@@ -161,6 +151,27 @@ class MetaTag implements MetaTaggableInterface
      */
     public function render_author()
     {
-        return strlen($this->author) > 0 ? $this->render_meta_tag('author', $this->author) : null;
+        return strlen($this->author) > 0 ? $this->render_tag('meta', ['name' => 'author', 'content' => $this->sanitise_content($this->author)]) : null;
+    }
+
+    /**
+     * Set the page's canonical URL.
+     * @method canonical
+     * @param  string    $url The page's canonical URL.
+     * @return null
+     */
+    public function canonical($url)
+    {
+        $this->canonical_url = $url;
+    }
+
+    /**
+     * Render the canonical URL link tag.
+     * @method render_canonical
+     * @return [type]           [description]
+     */
+    public function render_canonical()
+    {
+        return strlen($this->canonical_url) > 0 ? $this->render_tag('link', ['rel' => 'canonical', 'href' => $this->canonical_url]) : null;
     }
 }
