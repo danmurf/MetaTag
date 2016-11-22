@@ -46,7 +46,7 @@ Set the page's canonical URL
 $metatag->canonical("https://www.example.com/splendid");
 ```
 
-If you want to hide the page from search engines:
+If you'd rather hide the page from search engines:
 
 ```php
 $metatag->noindex(true);
@@ -67,7 +67,7 @@ Final output:
 <link rel="canonical" href="https://www.example.com/splendid">
 ```
 
-If you like to keep your output tidy, add a indent of 4 spaces to your meta tags:
+If you like to keep your output tidy, add an indent of 4 spaces to your meta tags:
 
 ```php
 $metatag->render(4);
