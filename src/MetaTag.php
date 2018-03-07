@@ -4,6 +4,8 @@ use danmurf\MetaTaggableInterface;
 
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.
+ * 
+ * @author Dan Murfitt <dan@murfitt.net>
  */
 class MetaTag
 {
