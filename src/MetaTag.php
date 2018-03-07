@@ -5,7 +5,7 @@ use danmurf\MetaTaggableInterface;
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.
  */
-class MetaTag implements MetaTaggableInterface
+class MetaTag
 {
     protected $prefix;
     protected $noindex;
