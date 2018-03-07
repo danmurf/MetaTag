@@ -1,6 +1,6 @@
-<?php namespace danmurf;
+<?php 
 
-use danmurf\MetaTaggableInterface;
+namespace danmurf;
 
 /**
  * Meta tag library for accumulating and rendering HTML head meta tags.
@@ -9,16 +9,39 @@ use danmurf\MetaTaggableInterface;
  */
 class MetaTag
 {
+    /**
+     * @var string
+     */
     protected $prefix;
+
+    /**
+     * @var boolean
+     */
     protected $noindex;
+
+    /**
+     * @var array
+     */
     protected $keywords;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var string
+     */
     protected $author;
+
+    /**
+     * @var string
+     */
     protected $canonical_url;
 
     /**
      * Output the meta tags.
-     * @method render
+     * 
      * @return string All the completed meta tags for the head section.
      */
     public function render($indent_spaces = 0)
@@ -37,10 +60,11 @@ class MetaTag
 
     /**
      * Render a head tag.
-     * @method render_tag
-     * @param  $type     $type       The type of tag, e.g. meta, or link.
-     * @param  array     $attributes A key value array of attributes
-     * @return string                The head tag string.
+     * 
+     * @param string $type The type of tag, e.g. meta, or link.
+     * @param array $attributes A key value array of attributes
+     * 
+     * @return string The head tag string.
      */
     private function render_tag($type, $attributes = array())
     {
@@ -58,9 +82,10 @@ class MetaTag
 
     /**
      * Clean the content so it is suitable for a meta tag content field.
-     * @method sanitise_content
-     * @param  string           $content Dirty string, with tags, quotes and what not.
-     * @return string                    Clean string, which won't break tags and will look nice.
+     * 
+     * @param string $content Dirty string, with tags, quotes and what not.
+     * 
+     * @return string Clean string, which won't break tags and will look nice.
      */
     private function sanitise_content($content)
     {
@@ -78,8 +103,8 @@ class MetaTag
 
     /**
      * Whether to add a noindex tag to the page.
-     * @method noindex
-     * @param  boolean $value True if you would like the page not to be indexed.
+     * 
+     * @param boolean $value True if you would like the page not to be indexed.
      */
     public function noindex($value)
     {
@@ -88,8 +113,8 @@ class MetaTag
 
     /**
      * Render the noindex tag.
-     * @method render_noindex
-     * @return string         The final noindex tag string.
+     * 
+     * @return string The final noindex tag string.
      */
     public function render_noindex()
     {
@@ -98,8 +123,8 @@ class MetaTag
 
     /**
      * Set the page meta keywords.
-     * @method keywords
-     * @param  array    $keywords An array of keywords to include.
+     * 
+     * @param array $keywords An array of keywords to include.
      */
     public function keywords($keywords)
     {
@@ -108,8 +133,8 @@ class MetaTag
 
     /**
      * Render the keywords tag.
-     * @method render_keywords
-     * @return string          The final keywords meta tag.
+     * 
+     * @return string The final keywords meta tag.
      */
     public function render_keywords()
     {
@@ -118,8 +143,8 @@ class MetaTag
 
     /**
      * Set the page meta description.
-     * @method description
-     * @param  string      $description A description of the page.
+     * 
+     * @param string $description A description of the page.
      */
     public function description($description)
     {
@@ -128,8 +153,8 @@ class MetaTag
 
     /**
      * Render the description meta tag.
-     * @method render_description
-     * @return string             The final description meta tag string.
+     * 
+     * @return string The final description meta tag string.
      */
     public function render_description()
     {
@@ -138,8 +163,8 @@ class MetaTag
 
     /**
      * Set the page's author meta tag.
-     * @method author
-     * @param  string $author The name of the author.
+     * 
+     * @param string $author The name of the author.
      */
     public function author($author)
     {
@@ -148,8 +173,8 @@ class MetaTag
 
     /**
      * Render the author meta tag.
-     * @method render_author
-     * @return string        The final author meta tag.
+     * 
+     * @return string The final author meta tag.
      */
     public function render_author()
     {
@@ -158,8 +183,9 @@ class MetaTag
 
     /**
      * Set the page's canonical URL.
-     * @method canonical
-     * @param  string    $url The page's canonical URL.
+     * 
+     * @param string $url The page's canonical URL.
+     * 
      * @return null
      */
     public function canonical($url)
@@ -169,8 +195,8 @@ class MetaTag
 
     /**
      * Render the canonical URL link tag.
-     * @method render_canonical
-     * @return [type]           [description]
+     * 
+     * @return string The page's canonical URL tag.
      */
     public function render_canonical()
     {
