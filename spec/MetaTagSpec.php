@@ -12,4 +12,9 @@ class MetaTagSpec extends ObjectBehavior
     {
         $this->shouldHaveType(MetaTag::class);
     }
+
+    function it_can_set_no_index()
+    {
+        $this->setNoIndex(true)->shouldReturn($this);
+    }
 }

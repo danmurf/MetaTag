@@ -109,7 +109,7 @@ class MetaTag
      * 
      * @return MetaTag
      */
-    public function setNoIndex(boolean $value): MetaTag
+    public function setNoIndex(bool $value): MetaTag
     {
         $this->noindex = $value;
 
