@@ -17,7 +17,7 @@ class MetaTag
     /**
      * @var boolean
      */
-    protected $noindex;
+    protected $noIndex;
 
     /**
      * @var array
@@ -37,23 +37,25 @@ class MetaTag
     /**
      * @var string
      */
-    protected $canonical_url;
+    protected $canonicalUrl;
 
     /**
      * Output the meta tags.
      * 
+     * @param int $indentSpaces The number of spaces to indent the tags, for tidyness.
+     * 
      * @return string All the completed meta tags for the head section.
      */
-    public function render($indent_spaces = 0)
+    public function render($indentSpaces = 0): string
     {
-        $this->prefix = str_repeat(" ", $indent_spaces);
+        $this->prefix = str_repeat(" ", $indentSpaces);
 
         $output = "";
-        $output .=  $this->render_noindex();
-        $output .=  $this->render_keywords();
-        $output .=  $this->render_description();
-        $output .=  $this->render_author();
-        $output .=  $this->render_canonical();
+        $output .=  $this->renderNoindex();
+        $output .=  $this->renderKeywords();
+        $output .=  $this->renderDescription();
+        $output .=  $this->renderAuthor();
+        $output .=  $this->renderCanonical();
 
         return $output;
     }
@@ -66,12 +68,11 @@ class MetaTag
      * 
      * @return string The head tag string.
      */
-    private function render_tag($type, $attributes = array())
+    private function renderTag(string $type, array $attributes = []): string
     {
         $tag = $this->prefix . '<' . $type;
 
-        foreach ($attributes as $attribute => $value)
-        {
+        foreach ($attributes as $attribute => $value) {
             $tag .= ' ' . $attribute . '="' . $value . '"';
         }
 
@@ -87,7 +88,7 @@ class MetaTag
      * 
      * @return string Clean string, which won't break tags and will look nice.
      */
-    private function sanitise_content($content)
+    private function sanitiseContent($content): string
     {
         //Remove any tags
         $content = strip_tags($content);
@@ -105,10 +106,14 @@ class MetaTag
      * Whether to add a noindex tag to the page.
      * 
      * @param boolean $value True if you would like the page not to be indexed.
+     * 
+     * @return MetaTag
      */
-    public function noindex($value)
+    public function setNoIndex(boolean $value): MetaTag
     {
         $this->noindex = $value;
+
+        return $this;
     }
 
     /**
@@ -116,19 +121,23 @@ class MetaTag
      * 
      * @return string The final noindex tag string.
      */
-    public function render_noindex()
+    public function renderNoindex(): string
     {
-        return $this->noindex == true ? $this->render_tag('meta', ['name' => 'robots', 'content' => 'noindex, noarchive, nofollow']) : null;
+        return $this->noIndex == true ? $this->renderTag('meta', ['name' => 'robots', 'content' => 'noindex, noarchive, nofollow']) : null;
     }
 
     /**
      * Set the page meta keywords.
      * 
      * @param array $keywords An array of keywords to include.
+     * 
+     * @return MetaTag
      */
-    public function keywords($keywords)
+    public function setKeywords(array $keywords): MetaTag
     {
         $this->keywords = $keywords;
+
+        return $this;
     }
 
     /**
@@ -136,19 +145,23 @@ class MetaTag
      * 
      * @return string The final keywords meta tag.
      */
-    public function render_keywords()
+    public function renderKeywords(): string
     {
-        return sizeof($this->keywords) > 0 ? $this->render_tag('meta', ['name' => 'keywords', 'content' => $this->sanitise_content(implode(", ", $this->keywords))]) : null;
+        return sizeof($this->keywords) > 0 ? $this->renderTag('meta', ['name' => 'keywords', 'content' => $this->sanitiseContent(implode(", ", $this->keywords))]) : null;
     }
 
     /**
      * Set the page meta description.
      * 
      * @param string $description A description of the page.
+     * 
+     * @return MetaTag
      */
-    public function description($description)
+    public function setDescription($description): MetaTag
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -156,19 +169,23 @@ class MetaTag
      * 
      * @return string The final description meta tag string.
      */
-    public function render_description()
+    public function renderDescription(): string
     {
-        return strlen($this->description) > 0 ? $this->render_tag('meta', ['name' => 'description', 'content' => $this->sanitise_content($this->description)]) : null;
+        return strlen($this->description) > 0 ? $this->renderTag('meta', ['name' => 'description', 'content' => $this->sanitiseContent($this->description)]) : null;
     }
 
     /**
      * Set the page's author meta tag.
      * 
      * @param string $author The name of the author.
+     * 
+     * @return MetaTag
      */
-    public function author($author)
+    public function setAuthor($author): MetaTag
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -176,9 +193,9 @@ class MetaTag
      * 
      * @return string The final author meta tag.
      */
-    public function render_author()
+    public function renderAuthor(): string
     {
-        return strlen($this->author) > 0 ? $this->render_tag('meta', ['name' => 'author', 'content' => $this->sanitise_content($this->author)]) : null;
+        return strlen($this->author) > 0 ? $this->renderTag('meta', ['name' => 'author', 'content' => $this->sanitiseContent($this->author)]) : null;
     }
 
     /**
@@ -186,11 +203,13 @@ class MetaTag
      * 
      * @param string $url The page's canonical URL.
      * 
-     * @return null
+     * @return MetaTag
      */
-    public function canonical($url)
+    public function setCanonicalUrl(string $url): MetaTag
     {
-        $this->canonical_url = $url;
+        $this->canonicalUrl = $url;
+
+        return $this;
     }
 
     /**
@@ -198,8 +217,8 @@ class MetaTag
      * 
      * @return string The page's canonical URL tag.
      */
-    public function render_canonical()
+    public function renderCanonical(): string
     {
-        return strlen($this->canonical_url) > 0 ? $this->render_tag('link', ['rel' => 'canonical', 'href' => $this->canonical_url]) : null;
+        return strlen($this->canonicalUrl) > 0 ? $this->renderTag('link', ['rel' => 'canonical', 'href' => $this->canonicalUrl]) : null;
     }
 }

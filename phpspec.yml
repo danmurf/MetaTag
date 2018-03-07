@@ -1,0 +1,4 @@
+suites:
+    metatag_suite:
+        namespace: danmurf
+        psr4_prefix: danmurf
