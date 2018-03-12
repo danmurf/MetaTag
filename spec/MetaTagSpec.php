@@ -115,10 +115,10 @@ class MetaTagSpec extends ObjectBehavior
     public function it_can_indent_rendered_tags()
     {
         $this->setNoIndex(true)
-        ->setKeywords(['first', 'second', 'third'])
-        ->setDescription('This is a description of the webpage.')
-        ->setAuthor('Jessie Wongus')
-        ->setCanonicalUrl('https://www.example.com/testing?q=hello-world');
+            ->setKeywords(['first', 'second', 'third'])
+            ->setDescription('This is a description of the webpage.')
+            ->setAuthor('Jessie Wongus')
+            ->setCanonicalUrl('https://www.example.com/testing?q=hello-world');
 
         $expectedResult = '    <meta name="robots" content="noindex, noarchive, nofollow">'."\n";
         $expectedResult .= '    <meta name="keywords" content="first, second, third">'."\n";
