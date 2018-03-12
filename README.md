@@ -26,30 +26,30 @@ class MyController
 Add page keywords:
 
 ```php
-$metatag->keywords(['awesome', 'weblog', 'writings']);
+$metatag->setKeywords(['awesome', 'weblog', 'writings']);
 ```
 
 Add a page description:
 
 ```php
-$metatag->description("This weblog is about...");
+$metatag->setDescription("This weblog is about...");
 ```
 
 Add an author tag:
 
 ```php
-$metatag->author("Jessie Wongus");
+$metatag->setAuthor("Jessie Wongus");
 ```
 
 Set the page's canonical URL
 ```php
-$metatag->canonical("https://www.example.com/splendid");
+$metatag->setCanonicalUrl("https://www.example.com/splendid");
 ```
 
 If you'd rather hide the page from search engines:
 
 ```php
-$metatag->noindex(true);
+$metatag->setNoindex(true);
 ```
 
 Then add the output to your view / template to render the meta tags:
