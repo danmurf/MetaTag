@@ -9,39 +9,25 @@ namespace danmurf;
  */
 class MetaTag
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $prefix;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $noIndex;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $keywords;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $author;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $canonicalUrl;
 
     /**
-     * Output the meta tags.
-     *
      * @param int $indentSpaces the number of spaces to indent the tags, for tidyness
      *
      * @return string all the completed meta tags for the head section
@@ -61,8 +47,6 @@ class MetaTag
     }
 
     /**
-     * Whether to add a noindex tag to the page.
-     *
      * @param bool $value true if you would like the page not to be indexed
      *
      * @return MetaTag
@@ -75,8 +59,6 @@ class MetaTag
     }
 
     /**
-     * Render the noindex tag.
-     *
      * @return string the final noindex tag string
      */
     public function renderNoindex(): ?string
@@ -85,8 +67,6 @@ class MetaTag
     }
 
     /**
-     * Set the page meta keywords.
-     *
      * @param array $keywords an array of keywords to include
      *
      * @return MetaTag
@@ -99,8 +79,6 @@ class MetaTag
     }
 
     /**
-     * Render the keywords tag.
-     *
      * @return string the final keywords meta tag
      */
     public function renderKeywords(): ?string
@@ -109,8 +87,6 @@ class MetaTag
     }
 
     /**
-     * Set the page meta description.
-     *
      * @param string $description a description of the page
      *
      * @return MetaTag
@@ -123,8 +99,6 @@ class MetaTag
     }
 
     /**
-     * Render the description meta tag.
-     *
      * @return string the final description meta tag string
      */
     public function renderDescription(): ?string
@@ -133,8 +107,6 @@ class MetaTag
     }
 
     /**
-     * Set the page's author meta tag.
-     *
      * @param string $author the name of the author
      *
      * @return MetaTag
@@ -147,8 +119,6 @@ class MetaTag
     }
 
     /**
-     * Render the author meta tag.
-     *
      * @return string the final author meta tag
      */
     public function renderAuthor(): ?string
@@ -157,8 +127,6 @@ class MetaTag
     }
 
     /**
-     * Set the page's canonical URL.
-     *
      * @param string $url the page's canonical URL
      *
      * @return MetaTag
