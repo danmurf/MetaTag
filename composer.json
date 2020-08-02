@@ -3,7 +3,7 @@
     "description": "An html head meta tag generator.",
     "type": "library",
     "require-dev": {
-        "phpspec/phpspec": "^4.3"
+        "phpspec/phpspec": "^4.3 || ^5.0"
     },
     "license": "MIT",
     "authors": [
